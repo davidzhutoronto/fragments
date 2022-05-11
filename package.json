@@ -1,0 +1,20 @@
+{
+  "name": "fragments",
+  "version": "1.0.0",
+  "description": "CCP555 - Cloud Computing",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/davidzhutoronto/fragments.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/davidzhutoronto/fragments/issues"
+  },
+  "homepage": "https://github.com/davidzhutoronto/fragments#readme"
+}
