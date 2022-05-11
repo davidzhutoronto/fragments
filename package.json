@@ -1,26 +1,22 @@
 {
   "name": "fragments",
-  "version": "1.0.0",
-  "description": "CCP555 - Cloud Computing",
+  "version": "0.0.1",
+  "private": true,
+  "description": "Fragments back-end API",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
+    "lint": "eslint --config .eslintrc.js src/**"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/davidzhutoronto/fragments.git"
   },
   "keywords": [],
-  "author": "",
+  "author": "David Zhu",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/davidzhutoronto/fragments/issues"
   },
-  "homepage": "https://github.com/davidzhutoronto/fragments#readme",
-  "devDependencies": {
-    "eslint": "^8.15.0",
-    "eslint-config-airbnb-base": "^15.0.0",
-    "eslint-plugin-import": "^2.26.0",
-    "prettier": "2.6.2"
-  }
+  "homepage": "https://github.com/davidzhutoronto/fragments#readme"
 }
