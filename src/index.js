@@ -22,5 +22,3 @@ process.on('unhandledRejection', (reason, promise) => {
 
 // Start our server
 require('./server');
-
-const unneedegsdfgsddVariable = 'This variable is never used';
