@@ -38,7 +38,7 @@ app.use(passport.initialize());
 // Define a simple health check route. If the server is running
 app.use('/', require('./routes'));
 
-// Add 404 middleware to handle any requests for resources that can't be found can't be found
+// Add 404 middleware to handle any requests for resources that can't be found
 app.use((req, res) => {
   res.status(404).json({
     status: 'error',
