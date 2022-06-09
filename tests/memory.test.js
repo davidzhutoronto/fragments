@@ -17,8 +17,8 @@ describe('Memory test', () => {
   });
 
   test('read Fragment with incorrect secondaryKey returns nothing', async () => {
-    await writeFragment('a', 'b', 123);
-    const result = await readFragment('a', 'c');
+    await writeFragmentData('a', 'b', 123);
+    const result = await readFragmentData('a', 'c');
     expect(result).toBe(undefined);
   });
 
