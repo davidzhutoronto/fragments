@@ -9,14 +9,10 @@ describe('Memory test', () => {
   // Each test will get its own, empty database instance
 
   test('read Fragment expects string keys', async () => {
-    expect(async () => await readFragment).rejects.toThrow();
-    expect(async () => await readFragment(1)).rejects.toThrow();
     expect(async () => await readFragment(1, 1)).rejects.toThrow();
   });
 
   test('write Fragment expects string keys', async () => {
-    expect(async () => await writeFragment()).rejects.toThrow();
-    expect(async () => await writeFragment(1)).rejects.toThrow();
     expect(async () => await writeFragment(1, 1)).rejects.toThrow();
   });
 
