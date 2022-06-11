@@ -14,13 +14,25 @@ describe('POST /v1/fragments', () => {
 
   // Using a valid username/password pair should give a success result with a .fragments array
   test('authenticated users can create a plain text fragment', async () => {
-    const fragment = new Fragment({ ownerId: '1234', type: 'text/plain', size: 0 });
-    await fragment.save();
-    await fragment.setData(Buffer.from('a'));
     const res = await request(app)
       .post('/v1/fragments')
       .auth('user1@email.com', 'password1')
-      .send({ dage: 'Link' });
+      .send('This is a text');
+    expect(res.statusCode).toBe(200);
+    expect(res.body.status).toBe('ok');
+  });
+
+  test('responses all necessary properties', async () => {
+    const fragment = new Fragment({ ownerId: '1234', type: 'text/plain', size: 0 });
+    await fragment.save();
+    await fragment.setData(Buffer.from('a'));
+
+    const res = await request(app)
+      .post('/v1/fragments')
+      .auth('user1@email.com', 'password1')
+      .send(fragment);
+
+    expect(Array.isArray(res.body.fragments)).toBe(true);
     expect(res.statusCode).toBe(200);
     expect(res.body.status).toBe('ok');
   });
