@@ -5,9 +5,9 @@ const { createSuccessResponse } = require('../../response');
  */
 module.exports = (req, res) => {
   let msg = {
-    fragments: [],
+    fragments: [req.body],
   };
+  console.log(req.body);
   let message = createSuccessResponse(msg);
-  console.log('dage' + req.type);
   res.status(200).json(message);
 };

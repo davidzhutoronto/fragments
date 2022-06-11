@@ -20,7 +20,7 @@ describe('POST /v1/fragments', () => {
     const res = await request(app)
       .post('/v1/fragments')
       .auth('user1@email.com', 'password1')
-      .send(fragment);
+      .send({ dage: 'Link' });
     expect(res.statusCode).toBe(200);
     expect(res.body.status).toBe('ok');
   });
