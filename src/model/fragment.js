@@ -88,7 +88,7 @@ class Fragment {
   getData() {
     // TODO - Done
     let read = readFragmentData(this.ownerId, this.id);
-    return Promise.resolve(read);
+    return read;
   }
 
   /**

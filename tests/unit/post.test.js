@@ -4,6 +4,7 @@ const request = require('supertest');
 
 const app = require('../../src/app');
 const { Fragment } = require('../../src/model/fragment');
+
 describe('POST /v1/fragments', () => {
   // If the request is missing the Authorization header, it should be forbidden
   test('unauthenticated requests are denied', () => request(app).post('/v1/fragments').expect(401));
@@ -22,20 +23,39 @@ describe('POST /v1/fragments', () => {
     expect(res.body.status).toBe('ok');
   });
 
-  test('responses all necessary properties', async () => {
+  /*   test('responses all necessary properties', async () => {
     const fragment = new Fragment({ ownerId: '1234', type: 'text/plain', size: 0 });
     await fragment.save();
     await fragment.setData(Buffer.from('a'));
 
     const res = await request(app)
-      .post('/v1/fragments')
+      .post('/v1/fragments', fragment)
       .auth('user1@email.com', 'password1')
-      .send(fragment);
+      .set('Content-Type', 'text/plain')
+      .send(fragment.data);
 
     expect(Array.isArray(res.body.fragments)).toBe(true);
     expect(res.statusCode).toBe(200);
     expect(res.body.status).toBe('ok');
-  });
+  }); */
 
+  test('authenticated users post a fragments, data saved and got match each other', async () => {
+    const res = await request(app)
+      .post('/v1/fragments')
+      .set('Content-Type', 'text/plain')
+      .auth('user1@email.com', 'password1')
+      .send('POST test string');
+
+    expect(res.statusCode).toBe(200);
+    expect(res.body.status).toBe('ok');
+
+    const fragment = new Fragment({
+      id: res.body.fragments.id,
+      ownerId: res.body.fragments.ownerId,
+      type: 'text/plain',
+      size: 0,
+    });
+    expect(await fragment.getData()).toBe('POST test string');
+  });
   // TODO: we'll need to add tests to check the contents of the fragments array later
 });
