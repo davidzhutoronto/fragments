@@ -13,7 +13,7 @@ describe('POST /v1/fragments', () => {
   test('incorrect credentials are denied', () =>
     request(app).post('/v1/fragments').auth('invalid@email.com', 'incorrect_password').expect(401));
 
-  // Using a valid username/password pair should give a success result with a .fragments array
+  // Using a valid username/password pair should give a success result with a fragments array
   test('authenticated users can create a plain text fragment', async () => {
     const res = await request(app)
       .post('/v1/fragments')
@@ -23,7 +23,7 @@ describe('POST /v1/fragments', () => {
     expect(res.body.status).toBe('ok');
   });
 
-  test('responses all necessary properties', async () => {
+  test('responses error if type is not supported', async () => {
     const fragment = new Fragment({ ownerId: '1234', type: 'text/plain', size: 0 });
     await fragment.save();
     await fragment.setData(Buffer.from('a'));

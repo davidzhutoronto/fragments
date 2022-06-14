@@ -4,14 +4,12 @@ const { Fragment } = require('../../model/fragment');
 /**
  * Post a fragment for the current user
  */
-module.exports = (req, res) => {
-  //console.log(req.user);
-  const fragment = new Fragment({ ownerId: req.user, type: 'text/plain', size: 0 });
-  fragment.save();
-  fragment.setData(Buffer.from(req.body.toString()));
-  res.set('Location', `${process.env.API_URL}/v1/fragments/${fragment.id}`);
+module.exports = async (req, res) => {
+  const deleted = req.params.id;
+  Fragment.delete(req.user, deleted);
+
   let msg = {
-    fragments: fragment,
+    deleted: deleted,
   };
   let message = createSuccessResponse(msg);
   res.status(200).json(message);

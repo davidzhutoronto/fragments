@@ -54,9 +54,7 @@ class Fragment {
     if (this.deleted) {
       throw new Error('Has been deleted');
     }
-    let fragment = readFragment(ownerId, id);
-
-    return fragment;
+    return await readFragment(ownerId, id);
   }
 
   /**
@@ -87,6 +85,7 @@ class Fragment {
    */
   getData() {
     // TODO - Done
+
     let read = readFragmentData(this.ownerId, this.id);
     return read;
   }
