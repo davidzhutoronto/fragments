@@ -9,6 +9,7 @@ const express = require('express');
 const router = express.Router();
 
 const { Fragment } = require('../../model/fragment');
+//const { createSuccessResponse } = require('../../response');
 
 // Use https://www.npmjs.com/package/content-type to create/parse Content-Type headers
 const contentType = require('content-type');
@@ -16,9 +17,7 @@ const contentType = require('content-type');
 // Define our first route, which will be: GET /v1/fragments
 router.get('/fragments/', require('./get'));
 
-router.get('fragment/:id', (req, res) => {
-  res.send(req.params);
-});
+router.get('/fragments/:id/info', require('./get-one-info'));
 
 // Other routes will go here later on...
 // Support sending various Content-Types on the body up to 5M in size
