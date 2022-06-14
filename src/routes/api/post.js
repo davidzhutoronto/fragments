@@ -9,7 +9,7 @@ module.exports = (req, res) => {
   const fragment = new Fragment({ ownerId: req.user, type: 'text/plain', size: 0 });
   fragment.save();
   fragment.setData(req.body.toString());
-
+  res.set('Location', `${process.env.API_URL}/v1/fragments/${fragment.id}`);
   let msg = {
     fragments: fragment,
   };

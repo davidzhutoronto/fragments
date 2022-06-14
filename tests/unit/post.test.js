@@ -23,7 +23,7 @@ describe('POST /v1/fragments', () => {
     expect(res.body.status).toBe('ok');
   });
 
-  /*   test('responses all necessary properties', async () => {
+  test('responses all necessary properties', async () => {
     const fragment = new Fragment({ ownerId: '1234', type: 'text/plain', size: 0 });
     await fragment.save();
     await fragment.setData(Buffer.from('a'));
@@ -31,15 +31,14 @@ describe('POST /v1/fragments', () => {
     const res = await request(app)
       .post('/v1/fragments', fragment)
       .auth('user1@email.com', 'password1')
-      .set('Content-Type', 'text/plain')
+      .set('Content-Type', 'notsupport')
       .send(fragment.data);
 
-    expect(Array.isArray(res.body.fragments)).toBe(true);
-    expect(res.statusCode).toBe(200);
-    expect(res.body.status).toBe('ok');
-  }); */
+    expect(res.statusCode).toBe(500);
+    expect(res.body.status).toBe('error');
+  });
 
-  test('authenticated users post a fragments, data saved and got match each other', async () => {
+  test('authenticated users post a fragments, data saved and read match each other', async () => {
     const res = await request(app)
       .post('/v1/fragments')
       .set('Content-Type', 'text/plain')
