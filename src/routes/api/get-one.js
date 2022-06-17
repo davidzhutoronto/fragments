@@ -1,17 +1,19 @@
-const { createSuccessResponse, createErrorResponse } = require('../../response');
+//const { createSuccessResponse } = require('../../response');
 const { Fragment } = require('../../model/fragment');
 /**
- * Get a list of fragments for the current user
+ * Get a fragment for the current user
  */
 module.exports = async (req, res) => {
   const fragment = await Fragment.byId(req.user, req.params.id);
+  const data = await fragment.getData();
 
-  const data = fragment.getData();
+  res.set('Content-Type', 'text/plain');
+  res.status(200).send(data);
 
-  let msg = {
-    data: data,
+  /* let msg = {
+    fragment: data,
   };
   let message = createSuccessResponse(msg);
 
-  res.status(200).json(message);
+  res.status(200).json(message); */
 };

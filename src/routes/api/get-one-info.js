@@ -7,10 +7,7 @@ module.exports = async (req, res) => {
   //const fragment = new Fragment({ ownerId: req.user, type: 'text/plain', size: 0 });
 
   const fragment = await Fragment.byId(req.user, req.params.id);
-  for (var property in fragment) {
-    console.log('dageCC');
-    console.log(property + '=' + fragment[property]);
-  }
+
   if (fragment) {
     let msg = {
       fragment: fragment,

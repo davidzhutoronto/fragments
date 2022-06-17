@@ -54,7 +54,9 @@ describe('POST /v1/fragments', () => {
       type: 'text/plain',
       size: 0,
     });
-    expect(await fragment.getData()).toBe('POST test string');
+    const textString = await fragment.getData();
+
+    expect(textString.toString()).toBe('POST test string');
   });
   // TODO: we'll need to add tests to check the contents of the fragments array later
 });

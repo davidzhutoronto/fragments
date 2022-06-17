@@ -12,8 +12,8 @@ describe('GET /v1/fragments', () => {
   test('incorrect credentials are denied', () =>
     request(app).get('/v1/fragments').auth('invalid@email.com', 'incorrect_password').expect(401));
 
-  /*  test('test :id route', async () => {
-    const res = await request(app).get('/v1/fragments/:id/').auth('user1@email.com', 'password1');
+  /*   test('test :id route', async () => {
+    const res = await request(app).get('/v1/fragments/abc').auth('user1@email.com', 'password1');
     expect(res.body.id).toBe('abc');
   }); */
 

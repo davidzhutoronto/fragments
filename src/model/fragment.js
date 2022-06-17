@@ -26,7 +26,6 @@ class Fragment {
     this.updated = updated;
     this.type = type;
     this.size = size;
-    this.deleted = false;
     this.created = new Date().toISOString();
     this.updated = new Date().toISOString();
   }
@@ -51,10 +50,14 @@ class Fragment {
    */
   static async byId(ownerId, id) {
     // TODO - Done
-    if (this.deleted) {
+    /* if (this.deleted) {
+      throw new Error('Has been deleted');
+    } */
+    const result = await readFragment(ownerId, id);
+    if (!result) {
       throw new Error('Has been deleted');
     }
-    return await readFragment(ownerId, id);
+    return result;
   }
 
   /**
@@ -65,7 +68,7 @@ class Fragment {
    */
   static delete(ownerId, id) {
     // TODO - Done
-    this.deleted = true;
+
     return deleteFragment(ownerId, id);
   }
 
@@ -85,9 +88,10 @@ class Fragment {
    */
   getData() {
     // TODO - Done
+    /* let read = readFragmentData(this.ownerId, this.id);
+    return read; */
 
-    let read = readFragmentData(this.ownerId, this.id);
-    return read;
+    return readFragmentData(this.ownerId, this.id);
   }
 
   /**
