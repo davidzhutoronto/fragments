@@ -30,7 +30,7 @@ RUN npm install
 COPY ./src ./src
 
 # Start the container by running our server
-CMD npm start
+CMD ["npm", "start"]
 
 # Copy our HTPASSWD file
 COPY ./tests/.htpasswd ./tests/.htpasswd
