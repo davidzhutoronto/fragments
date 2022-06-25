@@ -1,7 +1,9 @@
-# This is a comment Lab5 content
+# This is a comment Lab6 content
 # A text file that will define all of the Docker instructions nesary for Docker Engine 
 
-FROM node:16.15.0
+
+# Stage 0: install node + install +  dependencies
+FROM node:16.15.0@sha256:59eb4e9d6a344ae1161e7d6d8af831cb50713cc631889a5a8c2d438d6ec6aa0f AS dependencies
 
 LABEL maintainer="David Zhu <dzhu34@myseneca.ca>"
 LABEL description="Fragments node.js microservice"
@@ -17,16 +19,29 @@ ENV NPM_CONFIG_LOGLEVEL=warn
 # https://docs.npmjs.com/cli/v8/using-npm/config#color
 ENV NPM_CONFIG_COLOR=false
 
+# node env
+ENV NODE_ENV=production
+
 # Use /app as our working directory
 WORKDIR /app
 
 # Copy the package.json and package-lock.json files into /app
-COPY package*.json /app/
+COPY package.json package-lock.json ./
 
 # Install node dependencies defined in package-lock.json
-RUN npm install
+RUN npm ci --only=production
 
-# Copy src to /app/src/
+
+############################################################
+# Stage 1: Use dependencies to start the site
+FROM node:16.15.0@sha256:59eb4e9d6a344ae1161e7d6d8af831cb50713cc631889a5a8c2d438d6ec6aa0f
+
+WORKDIR /app
+
+COPY --chown=node:node --from=dependencies /app/node_modules /app/node_modules
+
+COPY package.json package-lock.json ./
+
 COPY ./src ./src
 
 # Start the container by running our server
