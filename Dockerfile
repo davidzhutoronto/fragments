@@ -38,7 +38,7 @@ FROM node:16.15.0@sha256:59eb4e9d6a344ae1161e7d6d8af831cb50713cc631889a5a8c2d438
 
 WORKDIR /app
 
-COPY --from=dependencies /app/node_modules /app/node_modules
+COPY --chown=node:node --from=dependencies /app/node_modules /app/node_modules
 
 COPY package.json package-lock.json ./
 
