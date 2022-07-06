@@ -19,7 +19,7 @@ describe('POST /v1/fragments', () => {
       .post('/v1/fragments')
       .auth('user1@email.com', 'password1')
       .send('This is a text');
-    expect(res.statusCode).toBe(200);
+    expect(res.statusCode).toBe(201);
     expect(res.body.status).toBe('ok');
   });
 
@@ -45,7 +45,7 @@ describe('POST /v1/fragments', () => {
       .auth('user1@email.com', 'password1')
       .send('POST test string');
 
-    expect(res.statusCode).toBe(200);
+    expect(res.statusCode).toBe(201);
     expect(res.body.status).toBe('ok');
 
     const fragment = new Fragment({

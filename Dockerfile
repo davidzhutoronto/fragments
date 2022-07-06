@@ -45,7 +45,7 @@ COPY package.json package-lock.json ./
 COPY ./src ./src
 
 # Start the container by running our server
-CMD ["npm", "start"]
+CMD ["node", "src/index"]
 
 # Copy our HTPASSWD file
 COPY ./tests/.htpasswd ./tests/.htpasswd
