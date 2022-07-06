@@ -7,7 +7,7 @@ module.exports = async (req, res) => {
   const fragment = await Fragment.byId(req.user, req.params.id);
   const data = await fragment.getData();
 
-  res.set('Content-Type', 'text/plain');
+  res.set('Content-Type', fragment.type);
   res.status(200).send(data);
 
   /* let msg = {

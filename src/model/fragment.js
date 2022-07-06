@@ -38,7 +38,7 @@ class Fragment {
    */
   static async byUser(ownerId, expand = false) {
     // TODO - Done
-    let fragments = listFragments(ownerId, expand);
+    let fragments = await listFragments(ownerId, expand);
     return Promise.resolve(fragments);
   }
 
@@ -105,7 +105,7 @@ class Fragment {
       throw new Error('Error data');
     }
     this.updated = this.updated = new Date().toISOString();
-    this.size = data.toString().length;
+    this.size = data.byteLength;
     return writeFragmentData(this.ownerId, this.id, data);
   }
 
@@ -126,11 +126,7 @@ class Fragment {
   get isText() {
     // TODO - Done
 
-    if (this.type.includes('text')) {
-      return true;
-    } else {
-      return false;
-    }
+    return this.type.includes('text');
   }
 
   /**

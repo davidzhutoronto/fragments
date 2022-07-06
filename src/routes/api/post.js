@@ -1,4 +1,6 @@
-const apiUrl = process.env.API_URL || 'http://localhost:8080';
+const logger = require('../../logger');
+
+//const apiUrl = process.env.API_URL || 'http://localhost:8080';
 
 const { createSuccessResponse } = require('../../response');
 //const { listFragments, readFragment, writeFragment } = require('../../model/data/memory/index');
@@ -7,18 +9,24 @@ const { Fragment } = require('../../model/fragment');
  * Post a fragment for the current user
  */
 module.exports = async (req, res) => {
-  console.log(req.user);
-  console.log(req.body);
-  const fragment = new Fragment({ ownerId: req.user, type: 'text/plain', size: 0 });
-  fragment.save();
+  logger.debug({ user: req.user });
+  logger.debug({ body: req.body });
 
-  fragment.setData(Buffer.from(req.body.toString()));
+  const fragment = new Fragment({ ownerId: req.user, type: 'text/plain', size: 0 });
+
+  try {
+    await fragment.save();
+    await fragment.setData(req.body);
+  } catch (err) {
+    logger.error({ err }, 'error on post');
+  }
+
   const st = await fragment.getData();
   console.log(st.toString());
-  res.set('Location', `${apiUrl}/v1/fragments/${fragment.id}`);
+  res.set('Location', `${req.headers.host}/v1/fragments/${fragment.id}`);
   let msg = {
     fragments: fragment,
   };
   let message = createSuccessResponse(msg);
-  res.status(200).json(message);
+  res.status(201).json(message);
 };
