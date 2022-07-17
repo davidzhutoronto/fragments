@@ -18,6 +18,7 @@ describe('POST /v1/fragments', () => {
     const res = await request(app)
       .post('/v1/fragments')
       .auth('user1@email.com', 'password1')
+      .set('Content-Type', 'text/plain')
       .send('This is a text');
     expect(res.statusCode).toBe(201);
     expect(res.body.status).toBe('ok');
@@ -31,8 +32,7 @@ describe('POST /v1/fragments', () => {
     const res = await request(app)
       .post('/v1/fragments', fragment)
       .auth('user1@email.com', 'password1')
-      .set('Content-Type', 'notsupport')
-      .send(fragment.data);
+      .set('Content-Type', 'not support');
 
     expect(res.statusCode).toBe(500);
     expect(res.body.status).toBe('error');

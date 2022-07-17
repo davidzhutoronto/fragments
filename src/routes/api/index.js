@@ -18,7 +18,7 @@ const contentType = require('content-type');
 router.get('/fragments', require('./get'));
 
 //GET a fragment
-router.get('/fragments/:id', require('./get-one'));
+router.get('/fragments/:id.:ext?', require('./get-one'));
 
 //GET fragments info
 router.get('/fragments/:id/info', require('./get-one-info'));

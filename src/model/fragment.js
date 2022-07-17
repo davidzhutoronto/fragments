@@ -146,7 +146,7 @@ class Fragment {
    */
   static isSupportedType(value) {
     // TODO - Done
-    if (value.includes('text')) {
+    if (value.includes('text') || value === 'application/json') {
       return true;
     } else {
       return false;

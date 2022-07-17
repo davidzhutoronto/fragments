@@ -11,11 +11,7 @@ module.exports = async (req, res) => {
 
   if (expand == 1) {
     const fragmentList = await Fragment.byUser(req.user, true);
-    let msg = {
-      fragments: fragmentList,
-    };
-    let message = createSuccessResponse(msg);
-    res.status(200).json(message);
+    res.status(200).json(createSuccessResponse({ fragments: fragmentList }));
   } else {
     const fragmentList = await Fragment.byUser(req.user);
     let msg = {
