@@ -32,6 +32,21 @@ describe('GET /v1/fragments/:id', () => {
     expect((await resGet).statusCode).toBe(200);
   });
 
+  test('markdown can be converted to html', async () => {
+    const res = await request(app)
+      .post('/v1/fragments')
+      .set('Content-Type', 'text/markdown')
+      .auth('user1@email.com', 'password1')
+      .send('#a fragment');
+
+    expect(res.statusCode).toBe(201);
+    expect(res.body.status).toBe('ok');
+
+    const resGet = request(app)
+      .get(`/v1/fragments/${res.body.fragments.id}.html`)
+      .auth('user1@email.com', 'password1');
+    expect((await resGet).statusCode).toBe(200);
+  });
   test('error if id not exist', async () => {
     const res = await request(app)
       .post('/v1/fragments')

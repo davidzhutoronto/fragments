@@ -17,7 +17,13 @@ const {
 class Fragment {
   constructor({ id = randomUUID(), ownerId, created, updated, type, size = 0 }) {
     // TODO - Done
-    if (!ownerId || !type || !type.includes('text') || typeof size !== 'number' || size < 0) {
+    if (
+      !ownerId ||
+      !type ||
+      !this.constructor.isSupportedType(type) ||
+      typeof size !== 'number' ||
+      size < 0
+    ) {
       throw new Error('Error data');
     }
     this.id = id;
