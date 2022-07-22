@@ -27,7 +27,7 @@ describe('GET /v1/fragments/:id/info', () => {
     expect(res.body.status).toBe('ok');
 
     const resGet = request(app)
-      .get(`/v1/fragments/${res.body.fragments.id}/info`)
+      .get(`/v1/fragments/${res.body.fragment.id}/info`)
       .auth('user1@email.com', 'password1');
     expect((await resGet).statusCode).toBe(200);
   });

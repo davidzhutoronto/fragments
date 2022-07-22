@@ -32,9 +32,9 @@ describe('POST /v1/fragments', () => {
     const res = await request(app)
       .post('/v1/fragments', fragment)
       .auth('user1@email.com', 'password1')
-      .set('Content-Type', 'not support');
+      .set('Content-Type', 'image/svg+xml');
 
-    expect(res.statusCode).toBe(500);
+    expect(res.statusCode).toBe(415);
     expect(res.body.status).toBe('error');
   });
 
@@ -49,8 +49,8 @@ describe('POST /v1/fragments', () => {
     expect(res.body.status).toBe('ok');
 
     const fragment = new Fragment({
-      id: res.body.fragments.id,
-      ownerId: res.body.fragments.ownerId,
+      id: res.body.fragment.id,
+      ownerId: res.body.fragment.ownerId,
       type: 'text/plain',
       size: 0,
     });

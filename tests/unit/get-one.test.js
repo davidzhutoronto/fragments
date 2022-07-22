@@ -27,7 +27,7 @@ describe('GET /v1/fragments/:id', () => {
     expect(res.body.status).toBe('ok');
 
     const resGet = request(app)
-      .get(`/v1/fragments/${res.body.fragments.id}`)
+      .get(`/v1/fragments/${res.body.fragment.id}`)
       .auth('user1@email.com', 'password1');
     expect((await resGet).statusCode).toBe(200);
   });
@@ -43,7 +43,7 @@ describe('GET /v1/fragments/:id', () => {
     expect(res.body.status).toBe('ok');
 
     const resGet = request(app)
-      .get(`/v1/fragments/${res.body.fragments.id}.html`)
+      .get(`/v1/fragments/${res.body.fragment.id}.html`)
       .auth('user1@email.com', 'password1');
     expect((await resGet).statusCode).toBe(200);
   });

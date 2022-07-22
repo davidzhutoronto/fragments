@@ -18,14 +18,8 @@ module.exports = async (req, res) => {
     }
   } catch (err) {
     logger.error({ err }, 'error on post');
-    let msg = {
-      status: 'error',
-      error: {
-        message: 'No Fragment Found',
-        code: 404,
-      },
-    };
-    res.status(404).json(createErrorResponse(404, msg));
+
+    res.status(404).json(createErrorResponse(404, 'No Fragment Found'));
   }
 
   //const fragment = await Fragment.byId(req.user, req.params.id);

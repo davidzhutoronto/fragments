@@ -61,7 +61,7 @@ class Fragment {
     } */
     const result = await readFragment(ownerId, id);
     if (!result) {
-      throw new Error('Has been deleted');
+      throw new Error('Not Exist or Has been deleted');
     }
     return result;
   }

@@ -20,14 +20,15 @@ module.exports = async (req, res) => {
         if (fragment.type === 'text/markdown') {
           const getData = await fragment.getData();
           const data = md.render(`${getData}`);
-          res.set('Content-Type', 'text/html');
+          res.setHeader('Content-Type', 'text/html');
           res.status(200).send(data);
         } else {
           res.status(404).json(createErrorResponse(404, 'Cannot convert'));
         }
       } else if (typeof req.params.ext === 'undefined') {
         const data = await fragment.getData();
-        res.set('Content-Type', fragment.type);
+
+        res.setHeader('Content-Type', fragment.type);
         res.status(200).send(data);
       } else {
         res.status(404).json(createErrorResponse(404, 'Not support converting'));
