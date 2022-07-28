@@ -1,6 +1,10 @@
 {
   "name": "fragments",
+<<<<<<< HEAD
   "version": "0.7.5",
+=======
+  "version": "0.7.2",
+>>>>>>> parent of fa8de71 (0.7.3)
   "private": true,
   "description": "Fragments back-end API",
   "main": "index.js",
