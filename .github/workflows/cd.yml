@@ -97,7 +97,7 @@ jobs:
           # Make sure this matches your Elastic Beanstalk environment name
           environment_name: fragments-env-1
           version_label: ${{ env.VERSION }}
-          deployment_package: ${{ env.COMPOSE_FILE }}
+          #deployment_package: ${{ env.COMPOSE_FILE }}
       # We need to create a new compose file to deploy to Elastic Beanstalk, and
       # it needs to include our updated Docker image info (e.g., the tag we
       # just pushed). We'll substitute environment variables to create a new
