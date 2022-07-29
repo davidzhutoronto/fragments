@@ -27,7 +27,7 @@ router.get('/fragments/:id/info', require('./get-one-info'));
 //router.put('/fragments/:id', require('./put'));
 
 //Delete a fragment not done as of assignment 1
-//router.delete('/fragments/:id', require('./delete'));
+router.delete('/fragments/:id', require('./delete'));
 
 // Other routes will go here later on...
 // Support sending various Content-Types on the body up to 5M in size

@@ -25,7 +25,7 @@ module.exports = async (req, res) => {
 
         /* const st = await fragment.getData();
     console.log(st.toString()); */
-        res.setHeader('Location', `http://${req.headers.host}/v1/fragments/${fragment.id}`);
+        res.set('Location', `http://${req.headers.host}/v1/fragments/${fragment.id}`);
 
         let msg = {
           fragment: fragment,
