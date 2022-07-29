@@ -26,7 +26,7 @@ router.get('/fragments/:id/info', require('./get-one-info'));
 //PUT a fragment not done as of assignment 1
 //router.put('/fragments/:id', require('./put'));
 
-//Delete a fragment not done as of assignment 1
+//Delete a fragment
 router.delete('/fragments/:id', require('./delete'));
 
 // Other routes will go here later on...
