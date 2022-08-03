@@ -7,7 +7,6 @@ POST http://localhost:8080/v1/fragments
 Authorization: Basic dXNlcjFAZW1haWwuY29tOnBhc3N3b3JkMQ==
 # We're sending a plain text fragment
 Content-Type: application/json
-# Body of the request goes in ```...``` when it's a string
 {"name": "David", "school": "Seneca"}
 
 # We expect to get back an HTTP 201

@@ -14,10 +14,11 @@ module.exports = async (req, res) => {
         fragment: fragment,
       };
       let message = createSuccessResponse(msg);
+
       res.status(200).json(message);
     }
   } catch (err) {
-    logger.error({ err }, 'error on post');
+    logger.error({ err }, 'error on get info');
 
     res.status(404).json(createErrorResponse(404, 'No Fragment Found'));
   }

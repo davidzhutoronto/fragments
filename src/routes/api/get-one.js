@@ -37,7 +37,7 @@ module.exports = async (req, res) => {
       res.status(404).json(createErrorResponse(404, 'Content type not supported'));
     }
   } catch (err) {
-    logger.error({ err }, 'error on post');
+    logger.error({ err }, 'error on get a fragment');
 
     res.status(404).json(createErrorResponse(404, 'No Fragment Found'));
   }
