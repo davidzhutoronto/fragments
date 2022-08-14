@@ -23,9 +23,6 @@ router.get('/fragments/:id.:ext?', require('./get-one'));
 //GET fragments info
 router.get('/fragments/:id/info', require('./get-one-info'));
 
-//PUT a fragment not done as of assignment 1
-//router.put('/fragments/:id', require('./put'));
-
 //Delete a fragment
 router.delete('/fragments/:id', require('./delete'));
 
@@ -47,5 +44,8 @@ const rawBody = () =>
 
 // Use a raw body parser for POST, which will give a `Buffer` Object or `{}` at `req.body`
 router.post('/fragments', rawBody(), require('./post'));
+
+//PUT a fragment not done as of assignment 1
+router.put('/fragments/:id', rawBody(), require('./put'));
 
 module.exports = router;

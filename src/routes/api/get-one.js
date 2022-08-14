@@ -10,7 +10,7 @@ const { Fragment } = require('../../model/fragment');
  * Get a fragment for the current user
  */
 module.exports = async (req, res) => {
-  console.log(req.params.ext);
+  console.log('get-one .ext' + req.params.ext);
 
   try {
     const fragment = await Fragment.byId(req.user, req.params.id);
@@ -27,7 +27,8 @@ module.exports = async (req, res) => {
         }
       } else if (typeof req.params.ext === 'undefined') {
         const data = await fragment.getData();
-
+        console.log('get-one fragment.type: ' + fragment.type);
+        console.log('get-one data: ' + data);
         res.setHeader('Content-Type', fragment.type);
         res.status(200).send(data);
       } else {

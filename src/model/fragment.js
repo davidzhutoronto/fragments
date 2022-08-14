@@ -110,7 +110,7 @@ class Fragment {
     if (!data) {
       throw new Error('Error data');
     }
-    this.updated = this.updated = new Date().toISOString();
+    this.updated = new Date().toISOString();
     this.size = data.byteLength;
     return writeFragmentData(this.ownerId, this.id, data);
   }
@@ -141,7 +141,16 @@ class Fragment {
    */
   get formats() {
     // TODO - Done
-    let types = ['text/plain'];
+    let types = [
+      'text/plain',
+      'text/markdown',
+      'text/html',
+      'application/json',
+      'image/png',
+      'image/jpeg',
+      'image/webp',
+      'image/gif',
+    ];
     return types;
   }
 
@@ -152,7 +161,16 @@ class Fragment {
    */
   static isSupportedType(value) {
     // TODO - Done
-    if (value.includes('text') || value === 'application/json') {
+    if (
+      value === 'text/plain' ||
+      value === 'text/plain; charset=utf-8' ||
+      value === 'text/markdown' ||
+      value === 'text/html' ||
+      value === 'application/json' ||
+      value === 'image/png' ||
+      value === 'image/jpeg' ||
+      value === 'image/webp'
+    ) {
       return true;
     } else {
       return false;
