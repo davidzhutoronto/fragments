@@ -24,8 +24,8 @@ module.exports = async (req, res) => {
     if (fragment.type != contentType) {
       res.status(400).json(createErrorResponse(400, 'Content Type Not Match'));
     } else {
-      await fragment.save();
       await fragment.setData(req.body);
+      await fragment.save();
       let msg = {
         fragment: fragment,
       };
