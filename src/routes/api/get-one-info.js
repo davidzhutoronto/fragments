@@ -19,7 +19,6 @@ module.exports = async (req, res) => {
     }
   } catch (err) {
     logger.error({ err }, 'error on get info');
-
     res.status(404).json(createErrorResponse(404, 'No Fragment Found'));
   }
 };

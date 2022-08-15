@@ -8,7 +8,9 @@ const { Fragment } = require('../../model/fragment');
  */
 module.exports = async (req, res) => {
   const deleted = req.params.id;
+
   try {
+    await Fragment.byId(req.user, req.params.id);
     await Fragment.delete(req.user, deleted);
 
     let msg = {
@@ -17,7 +19,7 @@ module.exports = async (req, res) => {
     let message = createSuccessResponse(msg);
     res.status(200).json(message);
   } catch (err) {
-    logger.error({ err }, 'error on post');
-    res.status(404).json(createErrorResponse(404, 'delete'));
+    logger.error({ err }, 'error on delete');
+    res.status(404).json(createErrorResponse(404, 'Not found'));
   }
 };
