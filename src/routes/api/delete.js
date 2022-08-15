@@ -18,6 +18,6 @@ module.exports = async (req, res) => {
     res.status(200).json(message);
   } catch (err) {
     logger.error({ err }, 'error on post');
-    res.status(404).json(createErrorResponse(404, 'Cannot convert to .html'));
+    res.status(404).json(createErrorResponse(404, 'delete'));
   }
 };
