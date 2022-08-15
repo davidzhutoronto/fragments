@@ -89,9 +89,13 @@ module.exports = async (req, res) => {
       }
       //6 no specified extension
       else if (typeof req.params.ext === 'undefined') {
-        const data = await fragment.getData();
-        res.setHeader('Content-Type', fragment.type);
-        res.status(200).send(data);
+        try {
+          const data = await fragment.getData();
+          res.setHeader('Content-Type', fragment.type);
+          res.status(200).send(data);
+        } catch (err) {
+          createErrorResponse(415, 'can not get data');
+        }
       } else {
         res.status(415).json(createErrorResponse(415, 'Not support converting'));
       }
@@ -101,6 +105,6 @@ module.exports = async (req, res) => {
   } catch (err) {
     logger.error({ err }, 'error on get a fragment');
 
-    res.status(404).json(createErrorResponse(404, 'No Fragment Found'));
+    res.json(createErrorResponse(404, 'not get by id'));
   }
 };
