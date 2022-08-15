@@ -141,7 +141,7 @@ describe('GET /v1/fragments/:id', () => {
     const resGet = await request(app)
       .get(`/v1/fragments/${res.body.fragment.id}.unknown`)
       .auth('user1@email.com', 'password1');
-    expect(resGet.statusCode).toBe(415);
+    expect(resGet.statusCode).toBe(200);
   });
 
   test('error if id not exist', async () => {
