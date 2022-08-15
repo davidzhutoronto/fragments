@@ -17,9 +17,8 @@ module.exports = async (req, res) => {
     if (Fragment.isSupportedType(contentType)) {
       const fragment = new Fragment({ ownerId: req.user, type: contentType });
       try {
-        await fragment.save();
         await fragment.setData(req.body);
-
+        await fragment.save();
         res.set('Location', `http://${req.headers.host}/v1/fragments/${fragment.id}`);
 
         let msg = {

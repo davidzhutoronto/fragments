@@ -10,7 +10,17 @@ module.exports = async (req, res) => {
   logger.debug({ body: req.body });
 
   try {
-    const fragment = await Fragment.byId(req.user, req.params.id);
+    const fragmentFound = await Fragment.byId(req.user, req.params.id);
+
+    const fragment = new Fragment({
+      id: fragmentFound.id,
+      ownerId: fragmentFound.ownerId,
+      type: fragmentFound.type,
+      created: fragmentFound.created,
+      updated: fragmentFound.updated,
+      size: fragmentFound.size,
+    });
+
     if (fragment.type != contentType) {
       res.status(400).json(createErrorResponse(400, 'Content Type Not Match'));
     } else {
