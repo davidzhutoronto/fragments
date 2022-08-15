@@ -32,12 +32,12 @@ describe('GET /v1/fragments/:id', () => {
     expect(resGet.statusCode).toBe(200);
   });
 
-  test('markdown can be converted to html', async () => {
+  test('markdown can be converted to html, and to its correct format', async () => {
     const res = await request(app)
       .post('/v1/fragments')
       .set('Content-Type', 'text/markdown')
       .auth('user1@email.com', 'password1')
-      .send('#a fragment');
+      .send('# a fragment');
 
     expect(res.statusCode).toBe(201);
     expect(res.body.status).toBe('ok');
@@ -45,6 +45,8 @@ describe('GET /v1/fragments/:id', () => {
     const resGet = await request(app)
       .get(`/v1/fragments/${res.body.fragment.id}.html`)
       .auth('user1@email.com', 'password1');
+
+    expect(resGet.text.startsWith('<h1>a fragment</h1>')).toBe(true);
     expect(resGet.statusCode).toBe(200);
   });
 
@@ -155,6 +157,6 @@ describe('GET /v1/fragments/:id', () => {
     expect(res.body.status).toBe('ok');
 
     const resGet = await request(app).get(`/v1/fragments/abc`).auth('user1@email.com', 'password1');
-    expect(resGet.statusCode).toBe(200);
+    expect(resGet.statusCode).toBe(404);
   });
 });
