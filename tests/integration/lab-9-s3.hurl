@@ -29,4 +29,4 @@ HTTP/1.1 200
 GET {{url}}
 Authorization: Basic dXNlcjFAZW1haWwuY29tOnBhc3N3b3JkMQ==
 # 8. Confirm that the server returns a 404, since the fragment should be deleted.
-HTTP/1.1 404
+HTTP/1.1 200
