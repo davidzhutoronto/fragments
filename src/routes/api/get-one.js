@@ -16,11 +16,12 @@ module.exports = async (req, res) => {
     const fragmentFound = await Fragment.byId(req.user, req.params.id);
 
     const fragment = new Fragment({
-      id: req.user,
-      ownerId: req.user,
+      id: fragmentFound.id,
+      ownerId: fragmentFound.ownerId,
       type: fragmentFound.type,
       created: fragmentFound.created,
       updated: fragmentFound.updated,
+      size: fragmentFound.size,
     });
 
     if (Fragment.isSupportedType(fragment.type)) {
