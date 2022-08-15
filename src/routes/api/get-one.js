@@ -13,7 +13,15 @@ const { Fragment } = require('../../model/fragment');
  */
 module.exports = async (req, res) => {
   try {
-    const fragment = await Fragment.byId(req.user, req.params.id);
+    const fragmentFound = await Fragment.byId(req.user, req.params.id);
+
+    const fragment = new Fragment({
+      id: req.user,
+      ownerId: req.user,
+      type: fragmentFound.type,
+      created: fragmentFound.created,
+      updated: fragmentFound.updated,
+    });
 
     if (Fragment.isSupportedType(fragment.type)) {
       //conversion extensions
@@ -61,7 +69,7 @@ module.exports = async (req, res) => {
           res.setHeader('Content-Type', 'application/json');
           res.status(200).send(data);
         } else {
-          res.json(createErrorResponse(415, 'Cannot convert to .json'));
+          res.status(415).json(createErrorResponse(415, 'Cannot convert to .json'));
         }
       }
       //5 .png .jpg, .webp, .git
@@ -84,7 +92,7 @@ module.exports = async (req, res) => {
           res.setHeader('Content-Type', fragmentType);
           res.status(200).send(data);
         } else {
-          res.json(createErrorResponse(415, 'Cannot convert'));
+          res.status(415).json(createErrorResponse(415, 'Cannot convert'));
         }
       }
       //6 no specified extension
@@ -94,10 +102,10 @@ module.exports = async (req, res) => {
           res.setHeader('Content-Type', fragment.type);
           res.status(200).send(data);
         } catch (err) {
-          res.json(createErrorResponse(415, 'can not get data'));
+          res.status(415).json(createErrorResponse(415, 'can not get data'));
         }
       } else {
-        res.json(createErrorResponse(415, 'Not support converting'));
+        res.status(415).json(createErrorResponse(415, 'Not support converting'));
       }
     } else {
       res.status(415).json(createErrorResponse(415, 'Content type not supported'));
