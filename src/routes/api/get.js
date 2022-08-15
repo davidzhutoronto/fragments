@@ -6,9 +6,9 @@ const { Fragment } = require('../../model/fragment');
  * Get a list of fragments for the current user
  */
 module.exports = async (req, res) => {
-  //const fragment = new Fragment({ ownerId: req.user, type: 'text/plain', size: 0 });
   let expand = req.query.expand;
 
+  //always return an array, even it's empty
   if (expand == 1) {
     const fragmentList = await Fragment.byUser(req.user, true);
     res.status(200).json(createSuccessResponse({ fragments: fragmentList }));

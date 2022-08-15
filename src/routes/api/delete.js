@@ -1,9 +1,11 @@
 const logger = require('../../logger');
 
-const { createSuccessResponse } = require('../../response');
-//const { listFragments, readFragment, writeFragment } = require('../../model/data/memory/index');
+const { createSuccessResponse, createErrorResponse } = require('../../response');
 const { Fragment } = require('../../model/fragment');
 
+/**
+ * Delete a fragment's info for current user
+ */
 module.exports = async (req, res) => {
   const deleted = req.params.id;
   try {
@@ -16,5 +18,6 @@ module.exports = async (req, res) => {
     res.status(200).json(message);
   } catch (err) {
     logger.error({ err }, 'error on post');
+    res.status(404).json(createErrorResponse(404, 'Cannot convert to .html'));
   }
 };

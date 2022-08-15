@@ -45,7 +45,7 @@ const rawBody = () =>
 // Use a raw body parser for POST, which will give a `Buffer` Object or `{}` at `req.body`
 router.post('/fragments', rawBody(), require('./post'));
 
-//PUT a fragment not done as of assignment 1
+//PUT
 router.put('/fragments/:id', rawBody(), require('./put'));
 
 module.exports = router;
