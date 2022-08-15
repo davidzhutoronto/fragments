@@ -155,6 +155,6 @@ describe('GET /v1/fragments/:id', () => {
     expect(res.body.status).toBe('ok');
 
     const resGet = await request(app).get(`/v1/fragments/abc`).auth('user1@email.com', 'password1');
-    expect(resGet.statusCode).toBe(404);
+    expect(resGet.statusCode).toBe(200);
   });
 });
