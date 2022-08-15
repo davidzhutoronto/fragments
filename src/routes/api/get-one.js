@@ -94,7 +94,7 @@ module.exports = async (req, res) => {
           res.setHeader('Content-Type', fragment.type);
           res.status(200).send(data);
         } catch (err) {
-          createErrorResponse(415, 'can not get data');
+          res.status(415).json(createErrorResponse(415, 'can not get data'));
         }
       } else {
         res.status(415).json(createErrorResponse(415, 'Not support converting'));
