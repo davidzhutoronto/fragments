@@ -169,7 +169,8 @@ class Fragment {
       value === 'application/json' ||
       value === 'image/png' ||
       value === 'image/jpeg' ||
-      value === 'image/webp'
+      value === 'image/webp' ||
+      value === 'image/gif'
     ) {
       return true;
     } else {

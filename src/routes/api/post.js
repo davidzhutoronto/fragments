@@ -11,14 +11,12 @@ module.exports = async (req, res) => {
   logger.debug({ body: req.body });
 
   const contentType = req.headers['content-type'];
-  console.log('contentType on POST: ' + contentType);
-  if (!Buffer.isBuffer(req.body)) {
+  if (req.body === {}) {
     res.status(415).json(createErrorResponse(415, 'Unsupported Media Type'));
   } else {
     if (Fragment.isSupportedType(contentType)) {
       const fragment = new Fragment({ ownerId: req.user, type: contentType, size: 0 });
       try {
-        console.log(req.body);
         await fragment.save();
         await fragment.setData(req.body);
 

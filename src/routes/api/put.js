@@ -8,8 +8,7 @@ module.exports = async (req, res) => {
   const contentType = req.headers['content-type'];
   logger.debug({ user: req.user });
   logger.debug({ body: req.body });
-  console.log('content type: ' + contentType);
-  console.log('PUT REQ BODY: ' + req.body);
+
   try {
     const fragment = await Fragment.byId(req.user, req.params.id);
     if (fragment.type != contentType) {
